@@ -9,8 +9,9 @@ pyautogui.FAILSAFE = True
 
 # Global Variables
 THETA_TRESHOLD = 25
-ACC_TRESHOLD = 350
-CLICK_TRESHOLD = 650
+ACC_TRESHOLD = 300
+RIGHT_CLICK_TRESHOLD = 850
+LEFT_CLICK_TRESHOLD = -550
 
 if len(sys.argv) != 2:
     print ("Unmatch number of arguments should be 2, given", len(sys.argv))
@@ -47,21 +48,21 @@ def main():
 
 		
 		# Clicks
-		if acc['a_x'] < -CLICK_TRESHOLD:
+		if acc['a_x'] < LEFT_CLICK_TRESHOLD:
 			pyautogui.click()
 			print('left click')
 
-		elif acc['a_x'] > CLICK_TRESHOLD:
+		elif acc['a_x'] > RIGHT_CLICK_TRESHOLD:
 			pyautogui.click(button='right')
 			print('right click')
 
-		# # Scroll
+		# Scroll
 		# if acc['a_y'] > -CLICK_TRESHOLD:
-		# 	pyautogui.click()
+		# 	pyautogui.scroll(100)
 		# 	print('scroll down')
 
 		# elif acc['a_y'] < CLICK_TRESHOLD:
-		# 	pyautogui.click(button='right')
+		# 	pyautogui.scroll(-100)
 		# 	print('scroll up')
 
 
