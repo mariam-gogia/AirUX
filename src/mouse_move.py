@@ -17,7 +17,6 @@ SWIPE_TRESHOLD = 1000
 
 if len(sys.argv) != 2:
     print ("Unmatch number of arguments should be 2, given", len(sys.argv))
-    print ("Please use format: python SensorTile_Animation_args.py SerialAddress")
 	
 def main():
 	r = SerialReader(port=sys.argv[1])
