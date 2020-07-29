@@ -13,6 +13,7 @@ ACC_TRESHOLD = 300
 RIGHT_CLICK_TRESHOLD = 850
 LEFT_CLICK_TRESHOLD = -550
 SCROLL_TRESHOLD = 600
+SWIPE_TRESHOLD = 1000
 
 if len(sys.argv) != 2:
     print ("Unmatch number of arguments should be 2, given", len(sys.argv))
@@ -44,7 +45,6 @@ def main():
 		elif angles['theta'] > THETA_TRESHOLD and acc['a_y'] > ACC_TRESHOLD:
 			pyautogui.moveRel(0, 20)
 			print('move down')
-
 		
 		# Clicks
 		if acc['a_x'] < LEFT_CLICK_TRESHOLD:
@@ -63,6 +63,17 @@ def main():
 		elif acc['a_y'] > SCROLL_TRESHOLD:
 			pyautogui.scroll(-50)
 			print('scroll up')
+
+		# Swipe
+		if acc['a_x'] < -SWIPE_TRESHOLD:
+			pyautogui.keyDown('ctrl')
+			pyautogui.press('left')
+			pyautogui.keyUp('ctrl')
+
+		elif acc['a_x'] > SWIPE_TRESHOLD:
+			pyautogui.keyDown('ctrl')
+			pyautogui.press('right')
+			pyautogui.keyUp('ctrl')
 
 		print(measurements)
 		print('\n')
