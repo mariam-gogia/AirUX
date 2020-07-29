@@ -12,13 +12,12 @@ THETA_TRESHOLD = 25
 ACC_TRESHOLD = 300
 RIGHT_CLICK_TRESHOLD = 850
 LEFT_CLICK_TRESHOLD = -550
+SCROLL_TRESHOLD = 600
 
 if len(sys.argv) != 2:
     print ("Unmatch number of arguments should be 2, given", len(sys.argv))
     print ("Please use format: python SensorTile_Animation_args.py SerialAddress")
 	
-
-
 def main():
 	r = SerialReader(port=sys.argv[1])
 	r.initialize_connection()
@@ -57,14 +56,13 @@ def main():
 			print('right click')
 
 		# Scroll
-		# if acc['a_y'] > -CLICK_TRESHOLD:
-		# 	pyautogui.scroll(100)
-		# 	print('scroll down')
+		if acc['a_y'] < -SCROLL_TRESHOLD:
+			pyautogui.scroll(50)
+			print('scroll down')
 
-		# elif acc['a_y'] < CLICK_TRESHOLD:
-		# 	pyautogui.scroll(-100)
-		# 	print('scroll up')
-
+		elif acc['a_y'] > SCROLL_TRESHOLD:
+			pyautogui.scroll(-50)
+			print('scroll up')
 
 		print(measurements)
 		print('\n')
