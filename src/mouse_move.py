@@ -46,33 +46,33 @@ def main():
 			print('move down')
 		
 		# Clicks
-		if acc['a_x'] < LEFT_CLICK_TRESHOLD:
+		if acc['a_x'] > 10 and acc['abs_A'] > 1200:
 			pyautogui.click()
 			print('left click')
 
-		elif acc['a_x'] > RIGHT_CLICK_TRESHOLD:
+		elif acc['a_x'] <-10 and acc['abs_A'] > 1200:
 			pyautogui.click(button='right')
 			print('right click')
 
 		# Scroll
-		if acc['a_y'] < -SCROLL_TRESHOLD:
-			pyautogui.scroll(50)
-			print('scroll down')
+		#if acc['a_y'] < -SCROLL_TRESHOLD:
+		#	pyautogui.scroll(50)
+		#	print('scroll down')
 
-		elif acc['a_y'] > SCROLL_TRESHOLD:
-			pyautogui.scroll(-50)
-			print('scroll up')
+		#elif acc['a_y'] > SCROLL_TRESHOLD:
+		#	pyautogui.scroll(-50)
+		#	print('scroll up')
 
 		# Swipe
-		if acc['a_x'] < -SWIPE_TRESHOLD:
-			pyautogui.keyDown('ctrl')
-			pyautogui.press('left')
-			pyautogui.keyUp('ctrl')
+		#if acc['a_x'] < -SWIPE_TRESHOLD:
+		#	pyautogui.keyDown('ctrl')
+		#	pyautogui.press('left')
+		#	pyautogui.keyUp('ctrl')
 
-		elif acc['a_x'] > SWIPE_TRESHOLD:
-			pyautogui.keyDown('ctrl')
-			pyautogui.press('right')
-			pyautogui.keyUp('ctrl')
+		#elif acc['a_x'] > SWIPE_TRESHOLD:
+		#	pyautogui.keyDown('ctrl')
+		#	pyautogui.press('right')
+		#	pyautogui.keyUp('ctrl')
 
 		print(measurements)
 		print('\n')

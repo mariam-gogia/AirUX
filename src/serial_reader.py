@@ -52,13 +52,17 @@ class SerialReader(object):
 					}
 					measurements['angles'] = angles_measurements
 
+				
+
 				if 'A_x' in line and 'A_y' in line and 'A_z' in line:
 					line = line.strip('\n').strip('\r').split(',')
 					acc_measurements = {
 						'a_x': float(line[0].split(' ')[-1]),
 						'a_y': float(line[1].split(' ')[-1]),
 						'a_z': float(line[2].split(' ')[-1]),
+						'abs_A': float(line[3].split(' ')[-1])
 					}
+
 					measurements['accelerations'] = acc_measurements
 
 				if 'angles' in measurements and 'accelerations' in measurements:
