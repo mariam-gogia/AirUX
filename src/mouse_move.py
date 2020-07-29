@@ -10,14 +10,16 @@ pyautogui.FAILSAFE = True
 # Global Variables
 THETA_TRESHOLD = 25
 ACC_TRESHOLD = 350
-CLICK_TRESHOLD = 550
+CLICK_TRESHOLD = 650
 
 if len(sys.argv) != 2:
     print ("Unmatch number of arguments should be 2, given", len(sys.argv))
     print ("Please use format: python SensorTile_Animation_args.py SerialAddress")
+	
+
 
 def main():
-	r = SerialReader(port='/dev/cu.usbmodemFFFFFFFEFFFF1')
+	r = SerialReader(port=sys.argv[1])
 	r.initialize_connection()
 
 	while True:
@@ -45,13 +47,23 @@ def main():
 
 		
 		# Clicks
-		if acc['a_x'] > -CLICK_TRESHOLD:
+		if acc['a_x'] < -CLICK_TRESHOLD:
 			pyautogui.click()
 			print('left click')
 
-		elif acc['a_x'] < CLICK_TRESHOLD:
+		elif acc['a_x'] > CLICK_TRESHOLD:
 			pyautogui.click(button='right')
 			print('right click')
+
+		# # Scroll
+		# if acc['a_y'] > -CLICK_TRESHOLD:
+		# 	pyautogui.click()
+		# 	print('scroll down')
+
+		# elif acc['a_y'] < CLICK_TRESHOLD:
+		# 	pyautogui.click(button='right')
+		# 	print('scroll up')
+
 
 		print(measurements)
 		print('\n')
