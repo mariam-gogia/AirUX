@@ -26,6 +26,7 @@ def main():
 		angles = measurements['angles']
 		acc = measurements['accelerations']
 
+		# Moves
 		if angles['theta'] > THETA_TRESHOLD and acc['a_x'] < -ACC_TRESHOLD:	
 			pyautogui.moveRel(-20,0)	
 			print('move left')
@@ -42,11 +43,13 @@ def main():
 			pyautogui.moveRel(0, 20)
 			print('move down')
 
+		
+		# Clicks
 		if acc['a_x'] > -CLICK_TRESHOLD:
 			pyautogui.click()
 			print('left click')
 
-		if acc['a_x'] < CLICK_TRESHOLD:
+		elif acc['a_x'] < CLICK_TRESHOLD:
 			pyautogui.click(button='right')
 			print('right click')
 
