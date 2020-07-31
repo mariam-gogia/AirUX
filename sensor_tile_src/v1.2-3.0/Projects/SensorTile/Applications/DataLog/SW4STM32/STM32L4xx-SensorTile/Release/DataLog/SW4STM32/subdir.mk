@@ -4,14 +4,14 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 S_SRCS += \
-/Users/mg/Downloads/v1.2-3.0/Projects/SensorTile/Applications/DataLog/SW4STM32/startup_stm32l476xx.s 
+/Users/mg/Desktop/Harvard\ VIII\ -\ Wearables/AirUX/sensor_tile_src/v1.2-3.0/Projects/SensorTile/Applications/DataLog/SW4STM32/startup_stm32l476xx.s 
 
 OBJS += \
 ./DataLog/SW4STM32/startup_stm32l476xx.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-DataLog/SW4STM32/startup_stm32l476xx.o: /Users/mg/Downloads/v1.2-3.0/Projects/SensorTile/Applications/DataLog/SW4STM32/startup_stm32l476xx.s
+DataLog/SW4STM32/startup_stm32l476xx.o: /Users/mg/Desktop/Harvard\ VIII\ -\ Wearables/AirUX/sensor_tile_src/v1.2-3.0/Projects/SensorTile/Applications/DataLog/SW4STM32/startup_stm32l476xx.s
 	@echo 'Building file: $<'
 	@echo 'Invoking: MCU GCC Assembler'
 	@echo $(PWD)

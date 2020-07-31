@@ -51,64 +51,64 @@ def main():
 		acc = measurements['accelerations']
 		gyro = measurements['gyroscope']
 
-		# 1200 or some thresh that is not hit by move
-		if acc['abs_a'] > 1250:
-			# handle clicks
+		# # 1200 or some thresh that is not hit by move
+		# if acc['abs_a'] > 1250:
+		# 	# handle clicks
 
 
-			# Clicks
-			if acc['a_x'] < -10:
-				if len(actions) != 0:
-					if actions[-1] != 'lc':
-						pyautogui.click()
-						actions.append('lc')
-						move = 'left click'
-						print('left click')
-				else:
-					pyautogui.click()
-					actions.append('lc')
-					move = 'left click'
-					print('left click')
+		# 	# Clicks
+		# 	if acc['a_x'] < -10:
+		# 		if len(actions) != 0:
+		# 			if actions[-1] != 'lc':
+		# 				pyautogui.click()
+		# 				actions.append('lc')
+		# 				move = 'left click'
+		# 				print('left click')
+		# 		else:
+		# 			pyautogui.click()
+		# 			actions.append('lc')
+		# 			move = 'left click'
+		# 			print('left click')
 
-			elif acc['a_x'] > 10:
-				if len(actions) != 0:
-					if actions[-1] != 'rc':
-						pyautogui.click(button='right')
-						actions.append('rc')
-						move = 'right click'
-						print('right click')
-				else: 
-					pyautogui.click(button='right')
-					actions.append('rc')
-					move = 'right click'
-					print('right click')
-		else:
-			# handle moves
+		# 	elif acc['a_x'] > 10:
+		# 		if len(actions) != 0:
+		# 			if actions[-1] != 'rc':
+		# 				pyautogui.click(button='right')
+		# 				actions.append('rc')
+		# 				move = 'right click'
+		# 				print('right click')
+		# 		else: 
+		# 			pyautogui.click(button='right')
+		# 			actions.append('rc')
+		# 			move = 'right click'
+		# 			print('right click')
+		# else:
+		# 	# handle moves
 
-			# Moves
-			if angles['theta'] > THETA_TRESHOLD and acc['a_x'] < -ACC_TRESHOLD:	
-				pyautogui.moveRel(-10,0)
-				actions.append('ml')
-				move = 'move left'	
-				print('move left')
+		# 	# Moves
+		# 	if angles['theta'] > THETA_TRESHOLD and acc['a_x'] < -ACC_TRESHOLD:	
+		# 		pyautogui.moveRel(-10,0)
+		# 		actions.append('ml')
+		# 		move = 'move left'	
+		# 		print('move left')
 
-			elif angles['theta'] > THETA_TRESHOLD and acc['a_x'] > ACC_TRESHOLD:
-				pyautogui.moveRel(10,0)
-				actions.append('mr')
-				move = 'move right'
-				print('move right')
+		# 	elif angles['theta'] > THETA_TRESHOLD and acc['a_x'] > ACC_TRESHOLD:
+		# 		pyautogui.moveRel(10,0)
+		# 		actions.append('mr')
+		# 		move = 'move right'
+		# 		print('move right')
 
-			elif angles['theta'] > THETA_TRESHOLD and acc['a_y'] < -ACC_TRESHOLD: 
-				pyautogui.moveRel(0,-10)
-				actions.append('md')
-				move = 'move up'
-				print('move up')
+		# 	elif angles['theta'] > THETA_TRESHOLD and acc['a_y'] < -ACC_TRESHOLD: 
+		# 		pyautogui.moveRel(0,-10)
+		# 		actions.append('md')
+		# 		move = 'move up'
+		# 		print('move up')
 
-			elif angles['theta'] > THETA_TRESHOLD and acc['a_y'] > ACC_TRESHOLD:
-				pyautogui.moveRel(0, 10)
-				actions.append('md')
-				move = 'move down'
-				print('move down')
+		# 	elif angles['theta'] > THETA_TRESHOLD and acc['a_y'] > ACC_TRESHOLD:
+		# 		pyautogui.moveRel(0, 10)
+		# 		actions.append('md')
+		# 		move = 'move down'
+		# 		print('move down')
 
 		# Scroll
 		#if acc['a_y'] < -SCROLL_TRESHOLD:ls
@@ -144,14 +144,14 @@ def main():
 			# accelerometer 
 			delta_acc_x = acc['a_x'] - prev_measurements['accelerations']['a_x']
 			delta_acc_y = acc['a_y'] - prev_measurements['accelerations']['a_y']
-			delta_acc_z = acc['a_y'] - prev_measurements['accelerations']['a_y']
-			delta_acc_z = acc['abs_a'] - prev_measurements['accelerations']['abs_a']
+			delta_acc_z = acc['a_z'] - prev_measurements['accelerations']['a_y']
+			delta_abs_acc = acc['abs_a'] - prev_measurements['accelerations']['abs_a']
 
 			# gyroscope 
 			delta_g_x = gyro['g_x'] - prev_measurements['gyroscope']['g_x']
 			delta_g_y = gyro['g_y'] - prev_measurements['gyroscope']['g_y']
 			delta_g_z = gyro['g_z'] - prev_measurements['gyroscope']['g_z']
-			delta_acc_z = gyro['abs_g'] - prev_measurements['gyroscope']['abs_g']
+			delta_abs_g = gyro['abs_g'] - prev_measurements['gyroscope']['abs_g']
 
 			measurements['delta_r'], measurements['delta_theta'], measurements['delta_phi'] = \
 				str(round(delta_r, 2)), str(round(delta_theta, 2)), str(round(delta_phi, 2))
@@ -164,9 +164,9 @@ def main():
 			measurements['delta_acc_x'], measurements['delta_acc_y'], measurements['delta_acc_z'], measurements['delta_abs_acc'] = 0, 0, 0, 0
 			measurements['delta_g_x'], measurements['delta_g_y'], measurements['delta_g_z'], measurements['delta_abs_g'] = 0, 0, 0, 0
 
-		for key in measurements:
-			print(measurements[key])
-		print('\n')
+		#for key in measurements:
+		#	print(measurements[key])
+		#print('\n')
 		
 		with open("data.csv", 'a') as csv_file:
 			writer = csv.DictWriter(csv_file, fieldnames=columns)
@@ -208,6 +208,7 @@ def main():
         	}
 			
 			# add to csv file
+			print(info['id'])
 			writer.writerow(info)
 
 		# save to the prev
