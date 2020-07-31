@@ -55,26 +55,37 @@ class SerialReader(object):
 					}
 					measurements['angles'] = angles_measurements
 
-				
-
 				if 'A_x' in line and 'A_y' in line and 'A_z' in line:
 					line = line.strip('\n').strip('\r').split(',')
 					acc_measurements = {
 						'a_x': float(line[0].split(' ')[-1]),
 						'a_y': float(line[1].split(' ')[-1]),
 						'a_z': float(line[2].split(' ')[-1]),
-						'abs_A': float(line[3].split(' ')[-1])
+						'abs_a': float(line[3].split(' ')[-1])
 					}
 
 					measurements['accelerations'] = acc_measurements
 
+				if 'GYR_X' in line and 'GYR_Y' in line and 'GYR_Z' in line:
+					line = line.strip('\n').strip('\r').split(',')
+					gyro_measurements = {
+						'g_x': float(line[0].split(' ')[-1]),
+						'g_y': float(line[1].split(' ')[-1]),
+						'g_z': float(line[2].split(' ')[-1]),
+						'abs_g': float(line[3].split(' ')[-1])
+					}
+
+					measurements['gyroscope'] = gyro_measurements
+
 				if 'angles' in measurements and 'accelerations' in measurements:
-					yield measurements
-					measurements = {}
+					if 'gyroscope' in measurements:
+						yield measurements
+						measurements = {}
 
 				if 'action' in measurements:
 					yield measurements
 					measurements = {}
+					
 
 
 def main():
