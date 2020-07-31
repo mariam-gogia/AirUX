@@ -176,7 +176,7 @@ def main():
 		prev_measurements = measurements
 		
 		# slow-down terminal results printing 
-		time.sleep(0.5) 
+		time.sleep(0.01) 
 
 
 if __name__ == '__main__':
