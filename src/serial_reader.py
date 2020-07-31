@@ -43,6 +43,9 @@ class SerialReader(object):
 				line = self.serial.readline()
 				line = line.decode('utf-8')
 
+				if 'Flipped' in line:
+					measurements['action'] = 'flip'
+
 				if 'theta' in line:
 					line = line.strip('\n').strip('\r').split(',')
 					angles_measurements = {
@@ -66,6 +69,10 @@ class SerialReader(object):
 					measurements['accelerations'] = acc_measurements
 
 				if 'angles' in measurements and 'accelerations' in measurements:
+					yield measurements
+					measurements = {}
+
+				if 'action' in measurements:
 					yield measurements
 					measurements = {}
 
