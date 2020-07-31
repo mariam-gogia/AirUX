@@ -166,7 +166,7 @@ void RTC_Handler( RTC_HandleTypeDef *RtcHandle )
 * @param  handle the device handle
 * @retval None
 */
-void Accelero_Sensor_Handler( void *handle )
+void Accelero_Sensor_Handler( void *handle, uint32_t msTick, uint32_t *msTickStateChange, uint8_t *state )
 {
   
   uint8_t who_am_i;
@@ -180,6 +180,9 @@ void Accelero_Sensor_Handler( void *handle )
   int32_t d1, d2, d3, d4, d5, d6;
   const float RADIAN = 57.2957795;
   
+  uint32_t tau = 300;
+  float z_thresh = 800.0f;
+
   BSP_ACCELERO_Get_Instance( handle, &id );
   
   BSP_ACCELERO_IsInitialized( handle, &status );
@@ -221,8 +224,36 @@ void Accelero_Sensor_Handler( void *handle )
 			  acceleration.AXIS_Y,
 			  acceleration.AXIS_Z,
 			  (int)d1, (int)d2
-
       );
+
+
+      //sprintf(dataOut, "\n\rA_z: %d, *state: %d, msTick - *msTickStateChange: %d, tau: %d",
+    	//	  (int) acceleration.AXIS_Z,
+		//	  (int)*state,
+		//	  (int)(msTick - *msTickStateChange),
+		//	  (int)tau);
+
+      // state machine implementation
+
+      if( (*state == 0) && (z < - z_thresh) && ((msTick - *msTickStateChange) > tau))
+      {
+    	  *state = 1;
+    	  *msTickStateChange = msTick;
+      }
+      else if ((*state == 1) && (z > z_thresh) && ((msTick - *msTickStateChange) > tau)){
+    	  *state = 2;
+    	  *msTickStateChange = msTick;
+      }
+      else if((*state == 2) && ((msTick - *msTickStateChange) < tau))
+      {
+    	  sprintf(dataOut, "\nFlipped\n");
+    	  CDC_Fill_Buffer((uint8_t *)dataOut, strlen(dataOut));
+      }
+      else if((msTick - *msTickStateChange)>tau){
+    	  *state = 0;
+    	  *msTickStateChange = msTick;
+      }
+
 
 
      // sprintf( dataOut, "\n\rACC_X: %d, ACC_Y: %d, ACC_Z: %d", (int)acceleration.AXIS_X, (int)acceleration.AXIS_Y, (int)acceleration.AXIS_Z );
