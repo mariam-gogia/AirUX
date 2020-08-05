@@ -7,6 +7,10 @@ import sys
 import numpy as np 
 import csv
 
+import joblib
+
+from process_signal import Signal_preprocessing
+
 pyautogui.FAILSAFE = True
 
 # Global Variables
@@ -42,15 +46,41 @@ def main():
 		writer.writeheader()
 
 	counter = 0
+	recording = False
+	list_acc_x, list_acc_y, list_acc_z = [], [], []
 
 	while True:
 		counter += 1
 		measurements = next(r.read_data())
 		move = None
+
 		angles = measurements['angles']
 		acc = measurements['accelerations']
 		gyro = measurements['gyroscope']
 
+		trigger = None
+		trigger_treshold = None
+
+		if recording and len(list_acc_x) < 4:
+			list_acc_x.append(acc['a_x'])
+			list_acc_y.append(acc['a_x'])
+			list_acc_z.append(acc['a_z'])
+
+		if trigger > trigger_treshold and not recording:
+			list_acc_x.append(acc['a_x'])
+			list_acc_y.append(acc['a_y'])
+			list_acc_z.append(acc['a_z'])
+
+		if recording and len(list_acc_x) == 4:
+			signal = Signal_preprocessing(list_acc_x, list_acc_y, list_acc_z)
+			clean_data = signal.extract_clean_signal()
+			model = joblib.load('rf_model.sav')
+			action = model.predict(clean_data)
+
+			list_acc_x, list_acc_y, list_acc_z = [], [], []
+
+			print(action)
+			
 		# # 1200 or some thresh that is not hit by move
 		# if acc['abs_a'] > 1250:
 		# 	# handle clicks
