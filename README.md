@@ -121,7 +121,7 @@ The State Machine works the following way:
 
   
 
-![stateMachine](https://github.com/mariam-gogia/AirUX/blob/master/images/state_machine)
+![stateMachine](https://github.com/mariam-gogia/AirUX/blob/master/images/state_machine.png)
 
   
 
