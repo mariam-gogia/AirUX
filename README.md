@@ -92,7 +92,7 @@ Looking at the raw data, it became clear that theta (inclination) is a very accu
 
   
 
-[data](https://github.com/mariam-gogia/AirUX/blob/master/images/InputPipeline.png)
+![data](https://github.com/mariam-gogia/AirUX/blob/master/images/InputPipeline.png)
 
   
   
@@ -121,7 +121,7 @@ The State Machine works the following way:
 
   
 
-[stateMachine](https://github.com/mariam-gogia/AirUX/blob/master/images/state_machine.png)
+![stateMachine](https://github.com/mariam-gogia/AirUX/blob/master/images/state_machine)
 
   
 
@@ -170,7 +170,7 @@ We observe that 1 swipe corresponds to 4 data frames, in other words, each four 
 
 The results are displayed below:
 
-[logloss](https://github.com/mariam-gogia/AirUX/blob/master/images/log_loss.png)
+![logloss](https://github.com/mariam-gogia/AirUX/blob/master/images/log_loss.png)
 
   
 
