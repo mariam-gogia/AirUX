@@ -179,12 +179,11 @@ It was obvious that the issue is coming from the data. We decided to aggregate a
 ## Model Implementation
 
 The final model predicts swipe gesture with ~90% accuracy. That's what we ended using in our real-time model integration. 
-There are many improvements that we can implement moving forward, including ***feature-selection automation***, which will allows us to select features automatically based on model prediction accuracy. One of the things we discovered that certain axes of certain parameters have higher correlation with the movement than others. There are oppportunities to utilize hybrid measurement units to gain higher accuracy. 
-  
+There are many improvements that we can implement moving forward, including feature-selection automation, which will allows us to select features automatically based on model prediction accuracy. One of the things we discovered that certain axes of certain parameters have higher correlation with the movement than others. There are oppportunities to utilize hybrid measurement units to gain higher accuracy. 
 
-***More details about the model can be found here***
 
-[model](https://github.com/mariam-gogia/AirUX/blob/master/jupyter_notebooks/air_gesture_model.ipynb)
+
+More details about the model can be found here: [model](https://github.com/mariam-gogia/AirUX/blob/master/jupyter_notebooks/air_gesture_model.ipynb)
     
 
 ## Slides & Demo Video
