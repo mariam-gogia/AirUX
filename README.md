@@ -173,25 +173,21 @@ The results are displayed below:
 ![logloss](https://github.com/mariam-gogia/AirUX/blob/master/images/log_loss.png)
 
   
-
-We chose to explore Random Forest.
-
-  
-  
-  
-
--   Artin’s Notebook
-    
-
+It was obvious that the issue is coming from the data. We decided to aggregate and shuffle all the data. Then conduct detailed feature analysis by comparing change between certain action (swipe left/right) and no action, as well as between actions (swipe right vs swipe left). Then remove the least correlated features, focusing on fewer features. We ended up using acceleration modified features as such as acceleration X standard deviation, acceleration X mean, acceleration X max mean, and so on repeating it for all axes. It was done becasue due to limited sample size overexecisive features representations noises model, in this case the less the better. 
   
 
 ## Model Implementation
 
--   Artin’s Model: Define & provide performance coefficient
-    
-
+The final model predicts swipe gesture with ~90% accuracy. That's what we ended using in our real-time model integration. 
+There are many improvements that we can implement moving forward, including ***feature-selection automation***, which will allows us to select features automatically based on model prediction accuracy. One of the things we discovered that certain axes of certain parameters have higher correlation with the movement than others. There are oppportunities to utilize hybrid measurement units to gain higher accuracy. 
   
+
+***More details about the model can be found here***
+
+![model](https://github.com/mariam-gogia/AirUX/blob/master/images/air_gesture_model.png)
+    
 
 ## Slides & Demo Video
 See demo video [here](https://www.youtube.com/watch?v=qL_FcSm2bJ4&feature=youtu.be)
+
 See presentation [here](https://docs.google.com/presentation/d/1nJDLNLOWU7jkE5T9yonzKxsSi_w1LN9vJsfU9uoG6Ak/edit)
