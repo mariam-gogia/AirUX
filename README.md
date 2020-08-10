@@ -184,7 +184,7 @@ There are many improvements that we can implement moving forward, including ***f
 
 ***More details about the model can be found here***
 
-![model](https://github.com/mariam-gogia/AirUX/blob/master/images/air_gesture_model.png)
+![model](https://github.com/mariam-gogia/AirUX/blob/master/src/air_gesture_model.ipynb)
     
 
 ## Slides & Demo Video
