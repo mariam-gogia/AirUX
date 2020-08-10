@@ -15,7 +15,7 @@ Based on the analysis of SensorTile measurements, we reimagined HCI interaction 
 
 ## Team & Contribution
 
-![](https://github.com/mariam-gogia/AirUX/blob/master/images/team.jpeg)
+![](https://github.com/mariam-gogia/AirUX/blob/master/images/Team.jpeg)
 
   
 
